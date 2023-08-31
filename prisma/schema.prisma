@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  name String
+  email String
+  password String
+  avatar String
+  boards Board[]
+  lists List[]
+  tasks Task[]
+
+
+}
+
+model Task {
+  id        Int      @id @default(autoincrement())
+  title     String
+  description String?
+  position Int
+  listId Int
+  list List @relation(fields: [listId], references: [id])
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  boardId Int
+  board Board @relation(fields: [boardId], references: [id])
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  }
+
+model Board{
+  id Int @id @default(autoincrement())
+  title String
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  lists List[]
+  tasks Task[]
+}
+
+model List{
+  id   Int @id @default(autoincrement())
+  name String
+  boardId Int
+  position Int
+  board Board @relation(fields: [boardId], references: [id])
+  tasks Task[]
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Provitional_Token{
+  id Int @id @default(autoincrement())
+  token String @unique
+  created DateTime @default(now())
+  expiration DateTime
+}
