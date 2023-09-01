@@ -3,7 +3,7 @@ import  Link  from 'next/link'
 import ButtonNavBar from './ButtonNavBar'
 const Navbar = () => {
     return (
-        <nav className='h-screen border  w-[18%] md:w-[30%] lg:w-[20%] flex flex-col p-3'>
+        <nav className='h-screen border-e  w-[15%] md:w-[30%] lg:w-[20%] flex flex-col p-1 md:p-3'>
 
             <div className='flex justify-center items-center p-4'>
               <span>logo</span>
@@ -16,7 +16,7 @@ const Navbar = () => {
                   <i class="bi bi-grid"></i>
                 </ButtonNavBar>
              
-                <ButtonNavBar route={'/member'} text='Member'>
+                <ButtonNavBar route={'/members'} text='Members'>
                   <i class="bi bi-people"></i>
                 </ButtonNavBar>
 

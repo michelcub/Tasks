@@ -19,8 +19,6 @@ model User{
   boards Board[]
   lists List[]
   tasks Task[]
-
-
 }
 
 model Task {
@@ -39,6 +37,16 @@ model Task {
   updatedAt DateTime @updatedAt
   }
 
+model Members{
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  boardId Int
+  board Board @relation(fields: [boardId], references: [id])
+  listId Int
+  list List @relation(fields: [listId], references: [id])
+}
+
 model Board{
   id Int @id @default(autoincrement())
   title String
@@ -46,6 +54,7 @@ model Board{
   user User @relation(fields: [userId], references: [id])
   lists List[]
   tasks Task[]
+  members Members[]
 }
 
 model List{
@@ -57,6 +66,7 @@ model List{
   tasks Task[]
   userId Int
   user User @relation(fields: [userId], references: [id])
+  assignedTo Members[]
 }
 
 model Provitional_Token{
