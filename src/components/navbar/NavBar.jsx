@@ -3,11 +3,11 @@ import  Link  from 'next/link'
 import ButtonNavBar from './ButtonNavBar'
 const Navbar = () => {
     return (
-        <nav className='h-screen border  w-[15%] md:w-[30%] lg:w-[20%] flex flex-col p-3'>
+        <nav className='h-screen border  w-[18%] md:w-[30%] lg:w-[20%] flex flex-col p-3'>
 
             <div className='flex justify-center items-center p-4'>
               <span>logo</span>
-              <h1>Task</h1>
+              <h1 className='hidden md:block'>Task</h1>
             </div>
 
             <div className='mt-[4rem] flex flex-col space-y-6'>
