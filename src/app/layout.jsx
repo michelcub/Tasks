@@ -3,7 +3,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import LoadingHome from './loading'
-import Navbar from '@/components/navbar'
+import Navbar from '@/components/navbar/NavBar'
 import { Suspense, lazy } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -13,7 +13,7 @@ export const metadata = {
   description: 'Task Aplication',
 }
 
-const MyNavbar = lazy(() => import('@/components/navbar'))
+const MyNavbar = lazy(() => import('@/components/navbar/NavBar'))
 
 export default function RootLayout({ children }) {
   return (
@@ -25,12 +25,12 @@ export default function RootLayout({ children }) {
 
           
           <Navbar/>
-          <section className='w-[70%]'>
+          <section className='w-[85%] md:w-[70%] lg:w-[80%]'>
 
             <header className='flex justify-between w-full p-2 items-center'>
-              <button><i class="bi bi-arrow-bar-left"></i></button>
+              <button className='hidden md:block'><i class="bi bi-arrow-bar-left"></i></button>
 
-              <div className='flex space-x-4 items-cente text-xl'>
+              <div className='flex space-x-4 items-cente text-xl ms-auto'>
                 <button><i class="bi bi-search"></i></button>
                 <button><i class="bi bi-chat"></i></button>
                 <button><i class="bi bi-bell"></i></button>
