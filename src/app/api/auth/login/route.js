@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 
 
-export const POST = async () => {
-    return NextResponse.json({status:200, msg:"login success"})
+export const POST = async (req) => {
+    console.log(req.body.json())
+    
+    
+    return NextResponse.json({ ...req.body.json() })
 }
