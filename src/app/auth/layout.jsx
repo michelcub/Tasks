@@ -1,4 +1,4 @@
-import HeaderLading from "@/components/landingPage/HeaderLading";
+import HeaderLading from "../../components/landingPage/HeaderLading";
 
 const AuthLayout = ({ children }) => {
     return (

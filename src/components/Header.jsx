@@ -1,7 +1,7 @@
 'use client'
 
 import { signOut } from "next-auth/react"
-import useAppContext from '@/Contexts/AppContext'
+import useAppContext from '../Contexts/AppContext'
 import { useState, useEffect } from 'react'
 
 const Header = () => {

@@ -1,7 +1,8 @@
 'use client'
-import BrowserImage from "@/components/landingPage/BrowserImage"
-import ButtonGetStarted from "@/components/landingPage/ButtonGetStarted"
-import HeaderLading from "@/components/landingPage/HeaderLading"
+
+import BrowserImage from "../components/landingPage/BrowserImage"
+import ButtonGetStarted from "../components/landingPage/ButtonGetStarted"
+import HeaderLading from "../components/landingPage/HeaderLading"
 
 
 export default function Home() {

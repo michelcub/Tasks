@@ -1,7 +1,8 @@
 'use client'
 
 import ButtonNavBar from './ButtonNavBar'
-
+import useAppContext from '../../Contexts/AppContext'
+import { useState, useEffect } from 'react'
 const Navbar = () => {
 
   

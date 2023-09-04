@@ -1,11 +1,11 @@
 'use client'
 
-import Navbar from "@/components/navbar/NavBar"
-import Header from "@/components/Header"
+import Navbar from "../../components/navbar/NavBar"
+import Header from "../../components/Header"
 
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
-import { useState, useEffect } from "react"
+import {  useEffect } from "react"
 
 
 

@@ -1,3 +1,4 @@
+
 const BrowserImage = () => {
     return (
         <div className="mockup-browser border bg-base-300 w-full h-full">

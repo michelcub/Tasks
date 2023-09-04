@@ -1,5 +1,5 @@
-import { LoginProvider } from '@/Contexts/LoginContext'
-import { AppProvider } from '@/Contexts/AppContext'
+import { LoginProvider } from '../Contexts/LoginContext'
+import { AppProvider } from '../Contexts/AppContext'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
