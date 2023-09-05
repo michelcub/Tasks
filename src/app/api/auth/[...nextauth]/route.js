@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@auth/prisma-adapter";
 //import { PrismaClient } from "@prisma/client";
-import checkCredentials from "@/services/checkCredentials";
+import checkCredentials from "../../../../services/checkCredentials";
 import { useRouter } from "next/navigation";
 
 //const prisma = new PrismaClient();

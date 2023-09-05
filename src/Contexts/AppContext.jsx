@@ -29,8 +29,8 @@ export const AppProvider = ({ children }) => {
             })
             console.log(response)
             const data = await response.json()
-            console.log(data)
-            setUser(data)
+            console.log(data.user)
+            setUser(data.user)
         }catch(error){
             console.log(error)
         }
