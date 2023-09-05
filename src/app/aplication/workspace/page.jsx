@@ -1,5 +1,6 @@
 'use client'
 
+import {CreateBoard} from '../../../../src/components/createBoardForm/CreateBoard'
 import {useForm } from 'react-hook-form'
 
 
@@ -40,22 +41,7 @@ const WorkspacePage = () => {
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
 
-                    <form onSubmit={handleSubmit()} className='flex flex-col space-y-6 items-center px-[4rem]'>
-                        <label htmlFor="nameBoardInput" className='flex flex-col gap-2 w-full'>
-                            Add name board
-                        <input {...register("nameBoard")} type="text" id='nameBoardInput' placeholder="Add project name" className="input input-bordered input-primary w-full max-w-xs" />
-                        </label>
-                        <label htmlFor="addMemberInput" className='flex flex-col gap-2 w-full'>
-                            Add member
-                        <input {...register('findMember')} type="text" id='addMemberInput' placeholder="Find members" className="input input-bordered input-primary w-full max-w-xs" />
-                        </label>
-                        <div className=' h-[4rem] w-full'>
-
-                        </div>
-                        <div className='w-full flex justify-center'>
-                            <button type="submit" className="btn btn-primary w-full">Add board</button>
-                        </div>
-                    </form>
+                    <CreateBoard/>
                    
                 </div>
             </dialog>
