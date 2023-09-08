@@ -1,27 +1,26 @@
 'use client'
 
 import { useState } from "react"
+import { Page3 } from "./page3"
+import {Page2} from './page2'
 import { Page1 } from "./page1"
 import { Steps } from "./Steps"
+
+import useBoards from "../../Contexts/Boards"
 export const CreateBoard = () => {
 
-    const [step, setStep] = useState(1)
-    const [boardName, setBoardName] = useState('')
-    const [members, setMembers] = useState([])
-    const [findMember, setFindMember] = useState('')
-    const [board, setBoard] = useState({})
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [success, setSuccess] = useState(false)
+    const {steps, setSteps} = useBoards()
     
     //if(step === 1) return <Page1 setStep={setStep} boardName={boardName} setBoardName={setBoardName} />
-
+    console.log(steps)
     return (
         <div className="h-[60vh] flex flex-col justify-start mt-5 item-center px-[3rem] space-y-7">
             <div>
                 <Steps/>
             </div>
-            {step === 1 ?<Page1 setStep={setStep} boardName={boardName} setBoardName={setBoardName} /> : ''}
+            {Number(steps) === 1 ?<Page1/> : ''}
+            {Number(steps) === 2 ?<Page2/> : ''}
+            {Number(steps) === 3 ?<Page3/> : ''}
         </div>
     )
 }
