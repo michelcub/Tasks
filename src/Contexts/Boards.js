@@ -5,26 +5,44 @@ import {create} from 'zustand';
 
 const useBoards = create((set) => {
     return{
-
+        error: null,
+        loading: true,
         steps: 1,
 
         boards: [],
         newBoard: {
-            name: '',
+            title: '',
             description: '',
             members: []
         },
         
+        listMembers: [],
 
 
         setSteps: (steps)=>{
             set({steps: steps})
         },
 
-        setBoards: async()=>{
-            const response = await fetch('http://localhost:3000/boards');
+        getBoards: async()=>{
+            try{
+                set({loading: true});
+                const response = await fetch('http://localhost:3000/api/boards',{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(response);
+            if(!response.ok) throw new Error('Error al obtener los tableros');
             const data = await response.json();
-            set({boards: data});
+            console.log(data);
+            set({boards: data.data});
+            }catch(err){
+                console.log(err);
+                set({error: err});
+            }finally{
+                set({loading: false});
+            }
         },
 
         setNewBoard: async(newBoard)=>{
@@ -35,8 +53,12 @@ const useBoards = create((set) => {
                 },
                 body: JSON.stringify(newBoard)
             });
+            console.log(response);
+            if(!response.ok) throw new Error('Error al crear el tablero');
             const data = await response.json();
-            set({newBoard: data});
+            console.log(data);
+            
+            set({newBoard: {title: '', description: '', members: []}});
         },
         
         setMember: (member) => {
@@ -57,14 +79,36 @@ const useBoards = create((set) => {
             }));
         },
 
-        setName: (name) => {
+        setName: (title) => {
             set((state) => ({
                 newBoard:{
                     ...state.newBoard,
-                    name: name,
+                    title: title,
                 }
             }));
         },
+
+        findUser: async (email) => {
+            try{
+                set({loading: true});
+                const response = await fetch(`http://localhost:3000/api/users?filter_email=${email}`,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(response);
+            if(!response.ok) throw new Error('Error al obtener los usuarios');
+            const data = await response.json();
+            console.log(data);
+            set({listMembers: data.data});
+            }catch(err){
+                console.log(err);
+                set({error: err});
+            }finally{
+                set({loading: false});
+            }
+        }
 
         
 

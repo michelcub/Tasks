@@ -19,6 +19,8 @@ model User{
   boards Board[]
   lists List[]
   tasks Task[]
+  members Members[]
+  assignedTask Assigned[]
 }
 
 model Task {
@@ -32,6 +34,7 @@ model Task {
   user User @relation(fields: [userId], references: [id])
   boardId Int
   board Board @relation(fields: [boardId], references: [id])
+  assignedTo Assigned[]
   completed Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -43,13 +46,19 @@ model Members{
   user User @relation(fields: [userId], references: [id])
   boardId Int
   board Board @relation(fields: [boardId], references: [id])
-  listId Int
-  list List @relation(fields: [listId], references: [id])
 }
 
+model Assigned{
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  taskId Int
+  task Task @relation(fields: [taskId], references: [id])
+}
 model Board{
   id Int @id @default(autoincrement())
   title String
+  description String?
   userId Int
   user User @relation(fields: [userId], references: [id])
   lists List[]
@@ -66,7 +75,6 @@ model List{
   tasks Task[]
   userId Int
   user User @relation(fields: [userId], references: [id])
-  assignedTo Members[]
 }
 
 model Provitional_Token{

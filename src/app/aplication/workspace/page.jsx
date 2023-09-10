@@ -2,43 +2,56 @@
 
 import {CreateBoard} from '../../../../src/components/createBoardForm/CreateBoard'
 import {useForm } from 'react-hook-form'
-
-
+import useBoards from '../../../Contexts/Boards'
+import { useEffect, useMemo } from 'react'
+import { get } from 'http'
+import toast from 'react-hot-toast'
+import { CardBoard } from '../../../../src/components/CardBoard'
 const WorkspacePage = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const {boards, getBoards, loading, error, newBoard} = useBoards()
 
+    console.log(newBoard)
+
+    useEffect(() => {
+        if(!boards || !boards.length) {
+            getBoards()
+        }
+    }, [])
+    
+    console.log(boards)
+    console.log(loading)
+    console.log(error)
+
+    if(error) return toast.error(error.message)
 
     return (
         <div className="p-4">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-bold">Workspace</h1>
                 <span>
                     <button onClick={()=>window.addBoard.showModal()} className="px-[2rem] py-1  bg-primary font-bold text-white rounded m-0">Add Board</button>
                 </span>
             </div>
-            <section>
 
-            <div className="card w-96 bg-base-100 shadow-xl bg-white shadow">
-  <figure className="px-10 pt-10">
-    <img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" className="rounded-xl" />
-  </figure>
-  <div className="card-body items-center text-center">
-    <h2 className="card-title">Shoes!</h2>
-    <p>If a dog chews shoes whose shoes does he choose?</p>
-    <div className="card-actions">
-      <button className="btn btn-primary">Buy Now</button>
-    </div>
-  </div>
-</div>
+            {loading && !boards?<div>Loading...</div>:(
+                
+                <section className="flex p-5 space-x-4 flex-nowrap">
 
-            </section>
+                {boards.length > 0 && boards.map(board => {
+                    return <CardBoard board={board}/>
+                })}
+
+                </section>
+            
+            )}
 
             <dialog id="addBoard" className="modal">
                 <div className="modal-box">
                     <form method="dialog">
                     
-                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
                     </form>
 
                     <CreateBoard/>

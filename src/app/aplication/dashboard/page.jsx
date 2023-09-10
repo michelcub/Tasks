@@ -1,6 +1,11 @@
+'use client'
+import { useEffect } from 'react'
 
 
 const DashBoardPage = () => {
+
+    
+    
     return (
         <div className="p-4">
             <div>

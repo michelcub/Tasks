@@ -1,7 +1,7 @@
 'use client'
 
 
-import { useContext, createContext } from "react";
+import { useContext, createContext, use } from "react";
 import { useEffect, useState } from "react";
 
 import toast from "react-hot-toast";
@@ -15,8 +15,9 @@ export const AppProvider = ({ children }) => {
     const [error, setError] = useState(null)
     const [isAuth, setIsAuth] = useState(false)
     const [user, setUser] = useState(null)
+    const [token, setToken] = useState(null)
 
-    console.log(dataUser)
+   
 
     const checkIsUserIsRegistred = async () => {
         try{
@@ -29,8 +30,8 @@ export const AppProvider = ({ children }) => {
             })
             console.log(response)
             const data = await response.json()
-            console.log(data.user)
-            setUser(data.user)
+            console.log(data.token)
+            setToken(data.token)
         }catch(error){
             console.log(error)
         }
@@ -39,7 +40,7 @@ export const AppProvider = ({ children }) => {
     }
     
     
-    console.log(user)
+    
 
     useEffect(() => {
         if(error){
@@ -55,7 +56,6 @@ export const AppProvider = ({ children }) => {
             toast.error('Unauthorized')
         }
         if(isAuth !== false && dataUser !== null){
-            console.log(dataUser)
             const user = checkIsUserIsRegistred()
             setUser(user)
         }
@@ -63,6 +63,17 @@ export const AppProvider = ({ children }) => {
     }, [error, loading, isAuth])
 
     
+    useEffect(() => {
+        if(token){
+            setIsAuth(true)
+            localStorage.setItem('token', token)
+        }else{
+            setIsAuth(false)
+        }
+
+    }, [token])
+
+
     const store = {
         dataUser,
         loading,
