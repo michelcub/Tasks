@@ -58,7 +58,7 @@ model Assigned{
 model Board{
   id Int @id @default(autoincrement())
   title String
-  description String?
+  details String
   userId Int
   user User @relation(fields: [userId], references: [id])
   lists List[]

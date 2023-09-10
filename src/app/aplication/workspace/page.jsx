@@ -18,13 +18,13 @@ const WorkspacePage = () => {
         if(!boards || !boards.length) {
             getBoards()
         }
-    }, [])
+    }, [newBoard])
     
     console.log(boards)
     console.log(loading)
     console.log(error)
 
-    if(error) return toast.error(error.message)
+    
 
     return (
         <div className="p-4">
@@ -40,7 +40,7 @@ const WorkspacePage = () => {
                 <section className="flex p-5 space-x-4 flex-nowrap">
 
                 {boards.length > 0 && boards.map(board => {
-                    return <CardBoard board={board}/>
+                    return <CardBoard board={board} key={board.id}/>
                 })}
 
                 </section>

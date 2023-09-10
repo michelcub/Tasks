@@ -46,7 +46,7 @@ CREATE TABLE "Assigned" (
 CREATE TABLE "Board" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "title" TEXT NOT NULL,
-    "description" TEXT,
+    "details" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
     CONSTRAINT "Board_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );

@@ -45,19 +45,25 @@ const useBoards = create((set) => {
             }
         },
 
-        setNewBoard: async(newBoard)=>{
-            const response = await fetch('http://localhost:3000/boards', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newBoard)
-            });
-            console.log(response);
-            if(!response.ok) throw new Error('Error al crear el tablero');
-            const data = await response.json();
-            console.log(data);
-            
+        setNewBoard: async (newBoard)=>{
+            try{
+                console.log(newBoard);
+                
+                await fetch(`http://localhost:3000/api/boards`,{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Autorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    body: JSON.stringify(newBoard)
+                })
+                .then((response) => {
+                    console.log(response);
+                    return response.json()
+                })
+            }catch(err){
+                console.log(err);
+            }
             set({newBoard: {title: '', description: '', members: []}});
         },
         
@@ -91,19 +97,17 @@ const useBoards = create((set) => {
         findUser: async (email) => {
             try{
                 set({loading: true});
-                const response = await fetch(`http://localhost:3000/api/users?filter_email=${email}`,{
+                const response = await fetch(`http://localhost:3000/api/users/${email}`,{
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response);
             if(!response.ok) throw new Error('Error al obtener los usuarios');
             const data = await response.json();
-            console.log(data);
-            set({listMembers: data.data});
+            await set({listMembers: data.data});
             }catch(err){
-                console.log(err);
+                
                 set({error: err});
             }finally{
                 set({loading: false});
